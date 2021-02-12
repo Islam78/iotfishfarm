@@ -1,0 +1,98 @@
+<!-- <app-header></app-header> -->
+<span class="parent-ico" routerLink="/" type="button">
+  <i class="pi pi-arrow-left display-ico"></i>
+</span>
+
+<!-- chose Lang -->
+<span class="Lang" type="button" (click)="ChangLan('ar')" *ngIf="Langage == 'en'"> Ar </span>
+<span class="Lang" type="button" (click)="ChangLan('en')" *ngIf="Langage == 'ar'"> En </span>
+<form (ngSubmit)="onSubmit()" [formGroup]="SearchCriteria">
+  <div class="formCard mb-3 container mt-5 mb-5">
+    <div class="row ">
+      <div class="form-group col-md-5">
+        <label>{{'DateFrom' | translate}}</label>
+        <input placeholder="First Name" type="date" class="form-control" formControlName="Start_Date">
+      </div>
+      <div class="form-group col-md-5">
+        <label>{{'DateTo' | translate}}</label>
+        <input placeholder="Last Name" type="date" class="form-control" formControlName="End_Date">
+      </div>
+      <div class="form-group col-md-2 mt-4">
+        <button class="btn btn-info test-reight">{{'Submit' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="text-center" *ngIf="ShowChart === true">
+  <div class="row" style="margin-left: 82px; margin-right: 50px;">
+    <div class="col-8">
+      <p-table [value]="Sensors" [paginator]="true" [rows]="7" [filterDelay]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="User_id">Id <p-sortIcon field="User_id"></p-sortIcon>
+            </th>
+            <th pSortableColumn="PH_sensor">Ph <p-sortIcon field="PH_sensor"></p-sortIcon>
+            </th>
+            <th pSortableColumn="Temperature_sensor">temp <p-sortIcon field="Temperature_sensor"></p-sortIcon>
+            </th>
+            <th pSortableColumn="Date">Date <p-sortIcon field="Date"></p-sortIcon>
+            </th>
+            <th pSortableColumn="Time">Time <p-sortIcon field="Time"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+          <tr>
+            <td>{{ rowIndex+1 }}</td>
+            <td>{{ product.PH_sensor }}</td>
+            <td>{{ product.Temperature_sensor }}</td>
+            <td>{{ product.DATE | date }}</td>
+            <td>{{ product.TIME }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="col-4 ">
+      <p-chart type="radar" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
+    </div>
+
+    <div class="col-8 mt-4">
+      <hr>
+      <p-chart type="horizontalBar"  [data]="data" width="200" height="500" (onDataSelect)="selectData($event)">
+      </p-chart>
+    </div>
+    <div class="col-4 mt-4">
+      <hr>
+      <p-chart type="line" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
+    </div>
+
+
+    <!-- <div class="col-6 mb-4">
+      <hr>
+      <p-chart type="bar" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
+    </div>
+    <div class="col-6 mb-4">
+      <hr>
+      <p-chart type="polarArea" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
+    </div> -->
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div class="input-group form-group col-md-12 form-group-no-border">
+        <input required formControlName="password" #password [type]="ShowPassord ==false ? 'password' : 'text'"
+          class="form-control" placeholder="Password">
+        <div class="input-group-prepend">
+          <span (click)="showPassword()" type="button" class="input-group-text"
+            [hidden]="!SearchCriteria.controls.password?.value">
+            <i [ngClass]=" ShowPassord ==false ? 'nc-icon nc-bulb-63' : 'nc-icon nc-lock-circle-open'"></i>
+          </span>
+        </div>
+      </div> -->

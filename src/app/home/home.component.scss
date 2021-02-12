@@ -1,0 +1,87 @@
+.HomePage {
+  width: 100% !important;
+  overflow: hidden;
+  .Parent {
+    z-index: 0;
+    width: 100%;
+    height: 722px;
+    background-image: url("../../assets/image/Dowloads/fish\ \(7\)1.jpg");
+    background-position: center;
+    background-size: cover;
+    .child {
+      background: #0000008f;
+      opacity: 0.7;
+      width: 100%;
+      height: 720px;
+      z-index: 1;
+    }
+    .content {
+      position: absolute;
+      overflow: hidden;
+      width: 100%;
+      top: 43%;
+      right: 21%;
+
+      h1 {
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-size: 60px;
+        color: whitesmoke;
+      }
+      h4 {
+        color: whitesmoke;
+        text-align: center;
+        margin: 0 auto;
+        width: 35%;
+        margin: 0 auto;
+        font-size: 25px;
+        line-height: 50px;
+        font-weight: bold;
+      }
+      .buttons {
+        margin-top: 5px;
+
+      }
+    }
+  }
+}
+// to make phone
+@media (min-width: 320px) and (max-width: 900px) {
+  .HomePage {
+    .Parent {
+      .child {
+        .content {
+          padding: 10px;
+          top: 25%;
+          right: 0;
+          margin: 10px 10px;
+          h1 {
+            font-size: 25px;
+          }
+          h4 {
+            font-size: 15px;
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}
+// to make responsive in tablet screen
+@media (min-width: 901px) and (max-width: 1270px) {
+  .HomePage {
+    .Parent {
+      .child {
+        .content {
+          h1 {
+            font-size: 35px;
+          }
+          h4 {
+            font-size: 25px;
+            width: 40%;
+          }
+        }
+      }
+    }
+  }
+}

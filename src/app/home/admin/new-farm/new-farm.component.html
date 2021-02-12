@@ -1,0 +1,33 @@
+<span class="parent-ico" routerLink="/" type="button">
+  <i class="pi pi-arrow-left display-ico"></i>
+</span>
+
+<!-- chose Lang -->
+<span class="Lang" type="button" (click)="ChangLan('ar')" *ngIf="Langage == 'en'"> Ar </span>
+<span class="Lang" type="button" (click)="ChangLan('en')" *ngIf="Langage == 'ar'"> En </span>
+<div class="divcontainer">
+  <h3 class="PageTitle"> {{ 'AddNewpool' | translate }}</h3>
+  <div class="Form">
+    <!-- Login Form -->
+    <form [formGroup]="NewFarmForm" (ngSubmit)="NewFarm()">
+      <!-- User Name -->
+      <span class="p-float-label">
+        <input type="text" class="form-control" placeholder=" {{'usercode' | translate}}" pInput name="usercode" required formControlName="usercode" id="usercode">
+        <!-- <label for="usercode">{{"usercode" | translate}}</label> -->
+      </span>
+      <!-- Farm_name -->
+      <span class="p-float-label">
+        <input type="text" class="form-control" placeholder=" {{'Farm_name' | translate}}" pInput name="Farm_name" required formControlName="Farm_name"
+          id="Farm_name">
+        <!-- <label for="Farm_name">{{"Farm_name" | translate}}</label> -->
+      </span><br>
+
+      <!-- routerLink="./auth"  -->
+      <!-- <button class="btn btnDark" (click)="LOGIN()"> Login </button> -->
+      <br>
+      <hr>
+      <button class="btn btnDark" [disabled]="NewFarmForm.invalid"> {{ 'AddNewpool' | translate }} </button>
+      <!-- <button class="btn btnDark" routerLink="/auth/SignUp">  {{ 'SignUp' | translate }} {{ 'Now' |translate}} !</button> -->
+    </form>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<span class="parent-ico" routerLink="/" type="button">
+  <i class="pi pi-arrow-left display-ico"></i>
+</span>
+
+<!-- chose Lang -->
+<span class="Lang" type="button" (click)="ChangLan('ar')" *ngIf="Langage == 'en'"> Ar </span>
+<span class="Lang" type="button" (click)="ChangLan('en')" *ngIf="Langage == 'ar'"> En </span>
+
+<div class="container">
+  <h3 class="PageTitle">{{ 'SignUp' | translate}}</h3>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8 mt-5">
+      <select [(ngModel)]="UserType" class="form-control">
+        <option value="Selected" hidden selected>User Type</option>
+        <option value="0">Admin</option>
+        <option value="1">User</option>
+      </select>
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+  <div class="Form">
+    <!-- Sign Up Admin-->
+    <form *ngIf="UserType == 0" [formGroup]="AdminSignUpForm" (ngSubmit)="AdminsendData()">
+      <!-- admincode -->
+      <span class="p-float-label">
+        <input type="text" placeholder="{{'admincode' |translate }}" formControlName="admincode" class="form-control"
+          pInput name="admincode" id="admincode" required>
+        <!-- <label for="admincode">{{'admincode' |translate }}</label> -->
+      </span>
+      <!--Name -->
+      <span class="p-float-label">
+        <input formControlName="name" type="text" placeholder="{{'name' |translate }}" class="form-control" pInput
+          name="name" id="name">
+        <!-- <label for="UserName">{{'UserName' | translate}}</label> -->
+      </span>
+      <!-- Email -->
+      <span class="p-float-label">
+        <input formControlName="email" type="email" placeholder="{{'Email' |translate }}" class="form-control" pInput
+          name="Email" id="Email">
+        <!-- <label for="Email">{{'Email' | translate}}</label> -->
+      </span>
+      <!-- password -->
+      <span class="p-float-label">
+        <input formControlName="password" type="password" placeholder="{{'Password' |translate }}" class="form-control"
+          pInput name="password" id="password">
+        <!-- <label for="password">{{'password' | translate}}</label> -->
+      </span>
+      <!-- phone -->
+      <span class="p-float-label">
+        <input formControlName="phone" type="number" placeholder="{{'MobileNumber' |translate }}" class="form-control"
+          pInput name="phone" id="phone">
+        <!-- <label for="MobileNumber">{{'MobileNumber' | translate}}</label> -->
+      </span>
+
+      <button class="btn btnDark" routerLink="./auth" [disabled]="AdminSignUpForm.invalid"> {{ 'SignUp' | translate }}
+      </button>
+      <hr>
+      <button class="btn btnDark" routerLink="/auth/SignUp"> {{ 'Login' | translate }} {{ 'Now' |translate}} !</button>
+    </form>
+    <!-- Sign Up User-->
+    <form *ngIf="UserType == 1" [formGroup]="UserSignUpForm" (ngSubmit)="UsersendData()">
+      <!-- usercode -->
+      <span class="p-float-label">
+        <input type="text" placeholder="{{'usercode' |translate }}" formControlName="usercode" class="form-control"
+          pInput name="usercode" id="usercode" required>
+        <!-- <label for="usercode">{{'usercode' |translate }}</label> -->
+      </span>
+      <!-- name -->
+      <span class="p-float-label">
+        <input formControlName="name" type="text" placeholder="{{'UserName' |translate }}" class="form-control" pInput
+          name="name" id="name">
+        <!-- <label for="name">{{'name' | translate}}</label> -->
+      </span>
+      <!-- Email -->
+      <span class="p-float-label">
+        <input formControlName="email" type="email" placeholder="{{'Email' |translate }}" class="form-control" pInput
+          name="Email" id="Email">
+        <!-- <label for="Email">{{'Email' | translate}}</label> -->
+      </span>
+      <!-- password -->
+      <span class="p-float-label">
+        <input formControlName="password" type="password" placeholder="{{'password' |translate }}" class="form-control"
+          pInput name="password" id="password">
+        <!-- <label for="password">{{'password' | translate}}</label> -->
+      </span>
+      <!-- Mobile Number -->
+      <span class="p-float-label">
+        <input formControlName="phone" type="number" placeholder="{{'MobileNumber' |translate }}" class="form-control"
+          pInput name="MobileNumber" id="MobileNumber">
+        <!-- <label for="MobileNumber">{{'MobileNumber' | translate}}</label> -->
+      </span>
+      <!-- Farm Address -->
+      <span class="p-float-label">
+        <input formControlName="address" type="text" placeholder="{{'FarmAddress' |translate }}" class="form-control"
+          pInput name="address" id="address">
+        <!-- <label for="address">{{'address' | translate}}</label> -->
+      </span>
+
+      <button class="btn btnDark" routerLink="./auth" [disabled]="UserSignUpForm.invalid"> {{ 'SignUp' | translate }}
+      </button>
+      <hr>
+      <button class="btn btnDark" routerLink="/auth/SignUp"> {{ 'Login' | translate }} {{ 'Now' |translate}} !</button>
+    </form>
+
+
+  </div>
+</div>
