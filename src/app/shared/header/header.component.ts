@@ -17,8 +17,10 @@ export class HeaderComponent implements OnInit {
     private messageService: MessageService,
     private shareService: SharedService
   ) { }
+
   items: MenuItem[];
   display = false;
+
   // Change Language
   Langage: any = localStorage.getItem('Lang') ? localStorage.getItem('Lang') : localStorage.setItem('Lang', 'en')
   ChangLan(Lang) {
@@ -34,40 +36,39 @@ export class HeaderComponent implements OnInit {
   UserDetail;
 
   ngOnInit() {
-    AOS.init({
-      duration: 2000
-    })
-    let x = JSON.parse(this.shareService.UserDetail())
-    setInterval(() => {
 
-      // this.UserDetail = JSON.parse(localStorage.getItem('user'))
+    setInterval(() => {
+      let x = JSON.parse(this.shareService.UserDetail())
+      this.UserDetail = JSON.parse(this.shareService.UserDetail())
       this.isAdmin = this.SharedService.UserDetail().includes('Admin_code')
       this.isUser = this.SharedService.UserDetail().includes('usercode')
       this.ToggelOption = x?.result.Farm_num
-      // (this.shareService.UserDetail().result.Farm_num as Array<any>).length > ? this.ToggelOption = JSON.parse(this.shareService.UserDetail())?.result.Farm_num : this.ToggelOption = [{Farm_num:{ Farm_num: "Call Admin To Add" }}]
-      // console.log(this.ToggelOption);
-
-    }, 500);
+    }, 50);
     this.primengConfig.ripple
   }
 
   LiveToggelValue = false
   LiveToggel() {
-    AOS.init({
-      duration: 1000
-    })
     this.LiveToggelValue = !this.LiveToggelValue
+
+    this.ReportToggelValue = false
   }
   ReportToggelValue = false
   ReportToggel() {
-    AOS.init({
-      duration: 1000
-    })
-    this.ReportToggelValue = !this.ReportToggelValue
+        this.ReportToggelValue = !this.ReportToggelValue
+        this.LiveToggelValue = false
   }
   LogOut() {
+    // to close every thins in navbar
+    this.display = false
+    this.LiveToggelValue = false
+    this.ReportToggelValue = false
+
     this.messageService.add({ severity: 'success', summary: 'Success', detail: `Loged Out ` })
-    localStorage.setItem('user', '')
+    // this.shareService.UserDetail() = []
+    // localStorage.getItem('user')
+    localStorage.setItem('user', null)
+
     this._Router.navigate(['/'])
 
   }

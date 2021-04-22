@@ -40,7 +40,6 @@
       }
       .buttons {
         margin-top: 5px;
-
       }
     }
   }
@@ -82,6 +81,16 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (min-width: 1396px) {
+  .Parent {
+
+    height: 100%;
+    .child {
+      height: 1100px;
     }
   }
 }

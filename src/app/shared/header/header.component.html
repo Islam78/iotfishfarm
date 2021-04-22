@@ -1,33 +1,33 @@
-<span class="parent-ico" (click)="display = true" data-aos="flip-left" type="button">
+<span class="parent-ico" (click)="display = true" type="button">
   <i class="pi pi-bars display-ico"></i>
 </span>
 <!-- chose Lang -->
-<span class="Lang" pRipple type="button" data-aos="fade-up" (click)="ChangLan('ar')" *ngIf="Langage == 'en'"> AR
+<span class="Lang" type="button" (click)="ChangLan('ar')" *ngIf="Langage == 'en'">
+  AR
 </span>
-<span class="Lang" pRipple type="button" data-aos="fade-up" (click)="ChangLan('en')" *ngIf="Langage == 'ar'"> EN
+<span class="Lang" type="button" (click)="ChangLan('en')" *ngIf="Langage == 'ar'">
+  EN
 </span>
-
 
 <p-sidebar [(visible)]="display" [style]="{width:'265px',padding: '3px 10px'}">
   <div>
     <br>
-    <i class="pi pi-bell" pBadge value="6" severity="success"></i>
-    <br>
-    <!-- <h3>{{UserDetail.Name}}</h3> -->
+    <!-- <i class="pi pi-bell" pBadge value="6" severity="success"></i> -->
+
+    <p *ngIf="isAdmin || isUser" class="UserName"> {{'Welcom' |translate}}, {{UserDetail?.result.Name}}</p>
     <button *ngIf="!isAdmin && !isUser" class="btn btnDark" routerLink="./auth"> {{'Login' | translate}} </button>
     <button *ngIf="isAdmin" class="btn btnDark" routerLink="./auth/SignUp"> {{'AddNewUser' | translate}}</button>
     <button *ngIf="isAdmin" class="btn btnDark" routerLink="./Admin/new-farm"> {{'AddNewpool' | translate}}</button>
     <button *ngIf="isUser" class="btn btnDark" (click)="LiveToggel()"> {{'Live' | translate}}</button>
-    <div data-aos="fade-right" class="LiveDropdown ml-3 mt-2 pb-4" *ngIf="LiveToggelValue == true">
+    <div class="LiveDropdown ml-3 mt-2 pb-4" *ngIf="LiveToggelValue == true">
       <div *ngFor="let item of ToggelOption">
         <button class="btn btnDark" [routerLink]="['./Clint/Live' , item.Farm_name]">
           {{item.Farm_name}}
         </button>
       </div>
     </div>
-    <!-- <p-dropdown [options]="ReportOption" [(ngModel)]="Reportvalue" class="btn btnDark"  placeholder="placeholder" optionLabel="name"></p-dropdown> -->
     <button *ngIf="isUser" class="btn btnDark" (click)="ReportToggel()"> {{'Reports' | translate}}</button>
-    <div data-aos="fade-right" data-aos-anchor-placement="center-center" class="LiveDropdown ml-3 mt-2 pb-4"
+    <div id="Report" class="LiveDropdown ml-3 mt-2 pb-4"
       *ngIf="ReportToggelValue == true">
       <div *ngFor="let item of ToggelOption">
         <button class="btn btnDark" [routerLink]="['./Clint/Report', item.Farm_name]">

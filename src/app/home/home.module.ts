@@ -16,6 +16,7 @@ import {StepsModule} from 'primeng/steps';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {TableModule} from 'primeng/table';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { KnobModule } from 'primeng/knob';
 
 @NgModule({
   declarations: [HomeComponent, AboutComponent, ReportsComponent, DashboardComponent],
@@ -31,7 +32,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     StepsModule,
     FormsModule,
     ReactiveFormsModule,
-    TableModule
+    TableModule,
+    KnobModule
   ]
 
 })

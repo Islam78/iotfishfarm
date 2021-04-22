@@ -6,12 +6,15 @@
 body {
   text-align: start;
   font-size: 14px;
-  // color: #777;
   background-color: #eaf0f7;
-  // padding-top: 80px;
   font-family: "Open Sans", sans-serif; // for english
-  // font-family: "Cairo", sans-serif; // for arabic
+
+
 }
+html, body {
+  height:100%;
+  // position: absolute;
+  }
 .Lang {
   box-shadow: 15px 10px 15px #2c2c2c;
   width: 50px;

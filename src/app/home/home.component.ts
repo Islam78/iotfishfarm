@@ -15,8 +15,6 @@ export class HomeComponent implements OnInit {
     private socketSer: SocketService,
     private primeConfig: PrimeNGConfig
   ) { }
-
-
   ngOnInit(): void {
     this.primeConfig.ripple = true
     // debugger
@@ -24,7 +22,7 @@ export class HomeComponent implements OnInit {
     // this.socketSer.getMessages()
     //   .subscribe((message: string, Ph: string) => {
     //     console.log(message, Ph);
-    //     // this.messageList.push(message);
+    //     this.messageList.push(message);
     //   });
   }
   Login() {

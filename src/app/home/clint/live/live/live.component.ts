@@ -15,8 +15,8 @@ export class LiveComponent implements OnInit {
   constructor(private translatr: TranslateService,
     private socketSer: SocketService, private ActiveRoute: ActivatedRoute,
     private shareService: SharedService) { }
-  LivePh: number = 0;
-  LiveTemp: number = 0;
+  LivePh: number =0;
+  LiveTemp: number =0;
   Img
   Farm_name
   UserDetail: any

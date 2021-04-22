@@ -39,18 +39,25 @@ export class LoginComponent implements OnInit {
   LOGIN() {
     console.log(this.LoginForm.value);
     this.authServices.Login(this.LoginForm.value).subscribe((res: any) => {
-      if (res.result.Admin_code) { //this is admin
+      //this is admin
+      if (res.result?.Admin_code) {
         this._Router.navigate(['/'])
         this.messageService.add({ severity: 'success', summary: 'Admin Login Success', detail: `Welcom, ${res.result.Name}` })
-      } else if (res.result.usercode) { //this is user
+      }
+      //this is user
+      else if (res.result?.usercode) {
         this._Router.navigate(['/'])
         this.messageService.add({ severity: 'success', summary: 'Login Success', detail: `Welcom, ${res.result.Name}` })
       }
+      //Error
+      else if (res?.error) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: `${res?.error}` })
+      }
       localStorage.setItem('user', JSON.stringify(res))
-      console.log(res);
-    }, (error) => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: `${error.error}` })
-
-    })
+    }
+      // , (error) => {
+      //   this.messageService.add({ severity: 'error', summary: 'Error', detail: `${error.error}` })
+      // }
+    )
   }
 }
