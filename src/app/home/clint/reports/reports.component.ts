@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
-import { MenuItem } from 'primeng/api';
 import { ReportService } from 'src/app/services/reports/report.service'
 @Component({
   selector: 'app-reports',
@@ -37,11 +36,17 @@ export class ReportsComponent implements OnInit {
   leng: any = new Array<Date>();
   PH_sensor: any = new Array<any>();
   Temperature_sensor: any = new Array<any>();
-  // products1: any = new Array<any>();
   onSubmit() {
     this.SearchCriteria.get('Farm_name').setValue(this.Farm_name)
-    // this.SearchCriteria.value
-    // { "User_code": "hema", "Farm_name":1, "Start_Date": "2021-01-31", "End_Date": "2021-01-31" }
+    //this.SearchCriteria.value
+    // let fake = {
+    //   End_Date: "2021-04-22",
+    //   Farm_name: "suze1",
+    //   Period: "",
+    //   Start_Date: "2020-03-18",
+    //   User_code: "hema",
+    // }
+
     this.ReportSer.getReport(this.SearchCriteria.value).subscribe((res: any) => {
       if (res.result[0]) {
         this.PH_sensor = []
@@ -52,18 +57,15 @@ export class ReportsComponent implements OnInit {
       }
 
       for (let index = 0; index < this.Sensors.length; index++) {
-        this.leng.push(this.Sensors[index].DATE)
+        this.leng.push(this.Sensors[index].date.slice(0, 9))
         this.PH_sensor.push(this.Sensors[index].PH_sensor)
         this.Temperature_sensor.push(this.Sensors[index].Temperature_sensor)
-        // console.log(this.PH_sensor);
       }
       this.MakeData();
-      // console.log(this.Sensors);
     })
   }
   options
   MakeData() {
-
     this.data = {
       labels: this.leng,
       datasets: [
@@ -119,6 +121,16 @@ export class ReportsComponent implements OnInit {
   }
   selectData(event) {
     this.messageService.add({ severity: 'info', summary: 'Data Selected', 'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index] });
+  }
+  ChartType = 'line'
+  ChangeChart(value) {
+    this.ChartType = value.target.value
+    // let Chart = document.getElementById('p-Chart')
+    // Chart.setAttribute('type', value.target.value)
+    // Chart.setAttribute('ng-reflect-type', value.target.value)
+    // // ng-reflect-type
+    // console.log(Chart);
+
   }
   // Change Language
   Langage: any = localStorage.getItem('Lang') ? localStorage.getItem('Lang') : localStorage.setItem('Lang', 'en')

@@ -55,6 +55,8 @@ export class HeaderComponent implements OnInit {
   }
   ReportToggelValue = false
   ReportToggel() {
+    console.log(this.ToggelOption);
+
         this.ReportToggelValue = !this.ReportToggelValue
         this.LiveToggelValue = false
   }
