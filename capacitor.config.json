@@ -1,0 +1,18 @@
+{
+  "appId": "com.MobileFishFarm.my",
+  "appName": "MobileFishFarm",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/FishFarm",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  }
+}
