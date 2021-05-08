@@ -1,6 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema",
   "welcom": "مرحبا في العربية ",
+  "Welcom":"مرحبا",
+  "WelcomUser":"الان يمكنك مراقبة جميع مزارع بضغطة زر واحدة",
+  "WelcomAdmin":"ماذا تريد ان تفعل ؟",
   "Under": "تحت التشيد!",
   "page": "هذه الصفحة قيد الإنشاء.",
   "Login": "تسجيل الدخول",

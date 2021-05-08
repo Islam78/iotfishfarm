@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { SocketService } from 'src/app/services/WebSocket/socket.service';
 import { PrimeNGConfig } from 'primeng/api';
+import { SharedService } from 'src/app/services/shared/shared.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,25 +15,21 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router,
     private authServices: AuthService,
     private socketSer: SocketService,
-    private primeConfig: PrimeNGConfig
-  ) { }
+    private SharedService: SharedService) { }
+  isUser
+  isAdmin
+  UserDetail;
   ngOnInit(): void {
-    this.primeConfig.ripple = true
-    // debugger
-    // this.socketSer.sendMessage()
-    // this.socketSer.getMessages()
-    //   .subscribe((message: string, Ph: string) => {
-    //     console.log(message, Ph);
-    //     this.messageList.push(message);
-    //   });
+    setInterval(() => {
+      let x = JSON.parse(this.SharedService.UserDetail())
+      this.UserDetail = JSON.parse(this.SharedService.UserDetail())
+      this.isAdmin = this.SharedService.UserDetail().includes('Admin_code')
+      this.isUser = this.SharedService.UserDetail().includes('usercode')
+      // this.ToggelOption = x?.result.Farm_num
+    }, 50);
+    // this.primeConfig.ripple = true
+
   }
-  Login() {
-    this.router.navigate(['/auth']);
-    // this.authServices.LogedIn();
-  }
-  SignUp() {
-    this.router.navigate(['/auth/SignUp']);
-    // this.authServices.LogedIn();
-  }
+
 
 }

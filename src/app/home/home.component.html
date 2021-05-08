@@ -1,17 +1,35 @@
-<app-header></app-header>
+<app-header *ngIf="isUser || isAdmin"></app-header>
 <div class="HomePage">
-  <div class="row">
-    <!-- <div class="Parent  text-center">
-      <div class="child">
-        <div class="content">
-          <h1>{{'MonitoringFishFarms' | translate}}</h1>
-          <h4>{{'ProjectIdea'| translate}}{{'ProjectIdea2'| translate}}{{'ProjectIdea3'| translate}}</h4>
-          <div class="buttons">
-            <button class="Effectbtn" pRipple routerLink="./auth"> {{ 'JoinUs' | translate }} </button>
-            <button class="Effectbtn " pRipple> {{ 'ContactUs' | translate }} </button>
+  <div class="background">
+    <div class="image">
+      <img *ngIf="!isUser && !isAdmin"  src="../../assets/image/Dowloads/fish7.jpg" alt="">
+      <img *ngIf="isUser" src="../../assets/image/Dowloads/fish (19).jpg" alt="">
+      <img *ngIf="isAdmin" src="../../assets/image/Dowloads/fish (18).jpg" alt="">
+    </div>
+    <div class="opacity">
+      <div class="content">
+        <div class="row">
+          <div class="col-md-2 col-sm-12"><br><br><br><br></div>
+          <div class="col-md-7 col-sm-12">
+            <div class="content">
+              <h1>{{'MonitoringFishFarms' | translate}}</h1>
+              <h2 *ngIf="isUser || isAdmin" style="color: #ffc107; font-weight: 700;">{{"Welcom"|translate}}
+                {{UserDetail?.result.Name}} </h2>
+              <h4 *ngIf="isUser">{{'WelcomUser'| translate}}</h4>
+              <h4 *ngIf="isAdmin">{{'WelcomAdmin'| translate}}</h4>
+              <h5 *ngIf="!isUser && !isAdmin">{{'ProjectIdea'| translate}}{{'ProjectIdea2'| translate}}{{'ProjectIdea3'|
+                translate}}</h5>
+              <div class="buttons">
+                <button *ngIf="!isUser && !isAdmin" class="Effectbtn" pRipple routerLink="./auth"> {{ 'Login' |
+                  translate }} </button>
+                <button *ngIf="!isUser && !isAdmin" class="Effectbtn " pRipple routerLink="./auth/SignUp"> {{ 'SignUp' |
+                  translate }} </button>
+              </div>
+            </div>
           </div>
+          <div class="col-md-3 col-sm-12"></div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

@@ -1,7 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema",
   "welcom": "welcom in english",
+  "Welcom":"Welcom",
   "Under": "Under Construction!",
+  "WelcomUser":"Now you can monitor all farms with one click",
+  "WelcomAdmin":"what do you want to do?",
   "page": "This page is under construction.",
   "Login": "Login",
   "SignUp": "Sign  Up",

@@ -38,8 +38,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     setInterval(() => {
-      let x = JSON.parse(this.shareService.UserDetail())
-      this.UserDetail = JSON.parse(this.shareService.UserDetail())
+      let x = JSON.parse(this.SharedService.UserDetail())
+      this.UserDetail = JSON.parse(this.SharedService.UserDetail())
       this.isAdmin = this.SharedService.UserDetail().includes('Admin_code')
       this.isUser = this.SharedService.UserDetail().includes('usercode')
       this.ToggelOption = x?.result.Farm_num
