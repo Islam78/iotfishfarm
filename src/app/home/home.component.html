@@ -2,7 +2,7 @@
 <div class="HomePage">
   <div class="background">
     <div class="image">
-      <img *ngIf="!isUser && !isAdmin"  src="../../assets/image/Dowloads/fish7.jpg" alt="">
+      <img *ngIf="!isUser && !isAdmin" src="../../assets/image/Dowloads/fish (7).jpg" alt="">
       <img *ngIf="isUser" src="../../assets/image/Dowloads/fish (19).jpg" alt="">
       <img *ngIf="isAdmin" src="../../assets/image/Dowloads/fish (18).jpg" alt="">
     </div>
@@ -13,16 +13,21 @@
           <div class="col-md-7 col-sm-12">
             <div class="content">
               <h1>{{'MonitoringFishFarms' | translate}}</h1>
+              <!-- not login -->
               <h2 *ngIf="isUser || isAdmin" style="color: #ffc107; font-weight: 700;">{{"Welcom"|translate}}
                 {{UserDetail?.result.Name}} </h2>
+              <!-- user login -->
               <h4 *ngIf="isUser">{{'WelcomUser'| translate}}</h4>
+              <!-- admin login -->
               <h4 *ngIf="isAdmin">{{'WelcomAdmin'| translate}}</h4>
+              <!-- not login -->
               <h5 *ngIf="!isUser && !isAdmin">{{'ProjectIdea'| translate}}{{'ProjectIdea2'| translate}}{{'ProjectIdea3'|
                 translate}}</h5>
-              <div class="buttons">
-                <button *ngIf="!isUser && !isAdmin" class="Effectbtn" pRipple routerLink="./auth"> {{ 'Login' |
+              <div class="buttons" *ngIf="!isUser && !isAdmin">
+                <!-- not login -->
+                <button class="Effectbtn" pRipple routerLink="./auth"> {{ 'Login' |
                   translate }} </button>
-                <button *ngIf="!isUser && !isAdmin" class="Effectbtn " pRipple routerLink="./auth/SignUp"> {{ 'SignUp' |
+                <button class="Effectbtn " pRipple routerLink="./auth/SignUp"> {{ 'SignUp' |
                   translate }} </button>
               </div>
             </div>
