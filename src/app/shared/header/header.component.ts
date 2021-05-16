@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
 import { SharedService } from 'src/app/services/shared/shared.service';
-import * as AOS from 'aos'
+import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src//app/_models/user';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,8 +16,11 @@ export class HeaderComponent implements OnInit {
     private SharedService: SharedService,
     private _Router: Router,
     private messageService: MessageService,
-    private shareService: SharedService
-  ) { }
+    private authServices: AuthService,
+
+  ) {
+
+  }
 
   items: MenuItem[];
   display = false;
@@ -29,36 +33,28 @@ export class HeaderComponent implements OnInit {
     this.translatr.use(this.Langage);
   }
 
-  isUser
-  isAdmin
-
   ToggelOption: any
   UserDetail;
-
   ngOnInit() {
-
-    setInterval(() => {
-      let x = JSON.parse(this.SharedService.UserDetail())
-      this.UserDetail = JSON.parse(this.SharedService.UserDetail())
-      this.isAdmin = this.SharedService.UserDetail().includes('Admin_code')
-      this.isUser = this.SharedService.UserDetail().includes('usercode')
-      this.ToggelOption = x?.result.Farm_num
-    }, 50);
+    this.authServices.userValue().subscribe
+      (user => {
+        this.UserDetail = user;
+        this.ToggelOption = user?.result.Farm_num
+      });
     this.primengConfig.ripple
   }
 
   LiveToggelValue = false
   LiveToggel() {
     this.LiveToggelValue = !this.LiveToggelValue
-
     this.ReportToggelValue = false
   }
   ReportToggelValue = false
   ReportToggel() {
     console.log(this.ToggelOption);
 
-        this.ReportToggelValue = !this.ReportToggelValue
-        this.LiveToggelValue = false
+    this.ReportToggelValue = !this.ReportToggelValue
+    this.LiveToggelValue = false
   }
   LogOut() {
     // to close every thins in navbar
@@ -66,12 +62,13 @@ export class HeaderComponent implements OnInit {
     this.LiveToggelValue = false
     this.ReportToggelValue = false
 
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: `Loged Out ` })
-    // this.shareService.UserDetail() = []
-    // localStorage.getItem('user')
+    this.authServices.logout()
+    // this.messageService.add({ severity: 'success', summary: 'Success', detail: `Loged Out ` })
+    // // this.shareService.UserDetail() = []
+    // // localStorage.getItem('user')
     localStorage.setItem('user', null)
 
-    this._Router.navigate(['/'])
+    this._Router.navigate(['/auth/Login'])
 
   }
 }

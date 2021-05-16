@@ -14,11 +14,16 @@
     <br>
     <!-- <i class="pi pi-bell" pBadge value="6" severity="success"></i> -->
 
-    <p *ngIf="isAdmin || isUser" class="UserName"> {{'Welcom' |translate}}, {{UserDetail?.result.Name}}</p>
-    <button *ngIf="!isAdmin && !isUser" class="btn btnDark" routerLink="./auth"> {{'Login' | translate}} </button>
-    <button *ngIf="isAdmin" class="btn btnDark" routerLink="./auth/SignUp"> {{'AddNewUser' | translate}}</button>
-    <button *ngIf="isAdmin" class="btn btnDark" routerLink="./Admin/new-farm"> {{'AddNewpool' | translate}}</button>
-    <button *ngIf="isUser" class="btn btnDark" (click)="LiveToggel()"> {{'Live' | translate}}</button>
+    <p *ngIf="UserDetail.result.Admin_code || UserDetail.result.usercode" class="UserName"> {{'Welcom' |translate}},
+      {{UserDetail?.result.Name}}</p>
+    <button *ngIf="!UserDetail.result.Admin_code && !UserDetail.result.usercode" class="btn btnDark"
+      routerLink="./auth"> {{'Login' | translate}} </button>
+    <button *ngIf="UserDetail.result.Admin_code" class="btn btnDark" routerLink="./auth/SignUp"> {{'AddNewUser' |
+      translate}}</button>
+    <button *ngIf="UserDetail.result.Admin_code" class="btn btnDark" routerLink="./Admin/new-farm"> {{'AddNewpool' |
+      translate}}</button>
+    <button *ngIf="UserDetail.result.usercode" class="btn btnDark" (click)="LiveToggel()"> {{'Live' |
+      translate}}</button>
     <div class="LiveDropdown ml-3 mt-2 pb-4" *ngIf="LiveToggelValue == true">
       <div *ngFor="let item of ToggelOption">
         <button class="btn btnDark" [routerLink]="['./Clint/Live' , item.Farm_name]">
@@ -26,9 +31,9 @@
         </button>
       </div>
     </div>
-    <button *ngIf="isUser" class="btn btnDark" (click)="ReportToggel()"> {{'Reports' | translate}}</button>
-    <div class="LiveDropdown ml-3 mt-2 pb-4"
-      *ngIf="ReportToggelValue == true">
+    <button *ngIf="UserDetail.result.usercode" class="btn btnDark" (click)="ReportToggel()"> {{'Reports' |
+      translate}}</button>
+    <div class="LiveDropdown ml-3 mt-2 pb-4" *ngIf="ReportToggelValue == true">
       <div *ngFor="let item of ToggelOption">
         <button class="btn btnDark" [routerLink]="['./Clint/Report', item.Farm_name]">
           {{item.Farm_name}}
@@ -36,6 +41,7 @@
       </div>
     </div>
     <button class="btn btnDark"> {{'About'| translate}} </button>
-    <button *ngIf="isUser || isAdmin" (click)="LogOut()" class="btn btnDark"> {{'LogOut'| translate}} </button>
+    <button *ngIf="UserDetail.result.usercode || UserDetail.result.Admin_code" (click)="LogOut()" class="btn btnDark">
+      {{'LogOut'| translate}} </button>
   </div>
 </p-sidebar>

@@ -11,20 +11,6 @@ export class SocketService {
   constructor() {
     this.socket = io(this.url, { secure: true })
   }
-  // listen(eventName: string) {
-
-  //   return new Observable((Subscriber) => {
-
-  //     this.socket.on(eventName, (data) => {
-  //       Subscriber.next(data)
-  //     })
-
-  //   })
-  // }
-  // emit(eventName, data) {
-  //   this.socket.emit(eventName, data)
-
-  // }
   public con (){
     this.socket.emit('roomcode');
   }

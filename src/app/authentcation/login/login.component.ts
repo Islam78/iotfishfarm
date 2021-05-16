@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { SharedService } from 'src/app/services/shared/shared.service'
+import { SharedService } from 'src/app/services/shared/shared.service';
+import { first } from 'rxjs/operators'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private authServices: AuthService, private http: HttpClient,
     private fb: FormBuilder, private translatr: TranslateService,
     private SharedService: SharedService, private _Router: Router,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private route: ActivatedRoute,) { }
   LoginForm: FormGroup
   ngOnInit(): void {
     this.InitForm()
@@ -35,26 +37,27 @@ export class LoginComponent implements OnInit {
     this.Langage = localStorage.getItem('Lang')
     this.translatr.use(this.Langage);
   }
-
+  error
   LOGIN() {
     console.log(this.LoginForm.value);
-    this.authServices.Login(this.LoginForm.value).subscribe((res: any) => {
-      //this is admin
-      if (res.result?.Admin_code) {
-        this._Router.navigate(['/'])
-        this.messageService.add({ severity: 'success', summary: 'Admin Login Success', detail: `Welcom, ${res.result.Name}` })
-      }
-      //this is user
-      else if (res.result?.usercode) {
-        this._Router.navigate(['/'])
-        this.messageService.add({ severity: 'success', summary: 'Login Success', detail: `Welcom, ${res.result.Name}` })
-      }
-      //Error
-      else if (res?.error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: `${res?.error}` })
-      }
-      localStorage.setItem('user', JSON.stringify(res))
-    }
-    )
+    this.authServices.Login(this.LoginForm.value)
+      .pipe(first())
+      .subscribe({
+        next: (res: any) => {
+          // get return url from query parameters or default to home page
+          if (res.error) {
+            this.error = res.error;
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: `${this.error}` })
+            return
+          }
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+        },
+        error: error => {
+          this.error = error;
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: `${this.error}` })
+        }
+      });
+
   }
 }

@@ -16,19 +16,16 @@ export class HomeComponent implements OnInit {
     private authServices: AuthService,
     private socketSer: SocketService,
     private SharedService: SharedService) { }
-  isUser
-  isAdmin
-  UserDetail;
-  ngOnInit(): void {
-    setInterval(() => {
-      let x = JSON.parse(this.SharedService.UserDetail())
-      this.UserDetail = JSON.parse(this.SharedService.UserDetail())
-      this.isAdmin = this.SharedService.UserDetail().includes('Admin_code')
-      this.isUser = this.SharedService.UserDetail().includes('usercode')
-      // this.ToggelOption = x?.result.Farm_num
-    }, 50);
-    // this.primeConfig.ripple = true
 
+  UserDetail: any;
+  ngOnInit(): void {
+    this.authServices.userValue().subscribe
+      (user => {
+        if (user) this.UserDetail = user;
+        // else this.UserDetail = {}
+        console.log(this.UserDetail);
+
+      });
   }
 
 
