@@ -7,84 +7,82 @@
 <span class="Lang" type="button" (click)="ChangLan('ar')" *ngIf="Langage == 'en'"> Ar </span>
 <span class="Lang" type="button" (click)="ChangLan('en')" *ngIf="Langage == 'ar'"> En </span>
 <form (ngSubmit)="onSubmit()" [formGroup]="SearchCriteria">
-  <div class="formCard mb-3 container mt-5 mb-5">
-    <div class="row ">
-      <div class="form-group col-md-5">
-        <label>{{'DateFrom' | translate}}</label>
-        <input placeholder="First Name" type="date" class="form-control" formControlName="Start_Date">
-      </div>
-      <div class="form-group col-md-5">
-        <label>{{'DateTo' | translate}}</label>
-        <input placeholder="Last Name" type="date" class="form-control" formControlName="End_Date">
-      </div>
-      <div class="form-group col-md-2 mt-4">
-        <button class="btn btn-info test-reight">{{'Submit' | translate}}</button>
-      </div>
+    <div class="formCard mb-3 container mt-5 mb-5">
+        <div class="row ">
+            <div class="form-group col-md-5">
+                <label>{{'DateFrom' | translate}}</label>
+                <input placeholder="First Name" type="date" class="form-control" formControlName="Start_Date">
+            </div>
+            <div class="form-group col-md-5">
+                <label>{{'DateTo' | translate}}</label>
+                <input placeholder="Last Name" type="date" class="form-control" formControlName="End_Date">
+            </div>
+            <div class="form-group col-md-2 mt-4">
+                <button class="btn btn-info test-reight">{{'Submit' | translate}}</button>
+            </div>
+        </div>
     </div>
-  </div>
 </form>
 
 <div class="text-center" *ngIf="ShowChart === true">
-  <div class="row">
-    <div class="col-md-8 col-sm-12">
-      <p-table [responsive]="true" [value]="Sensors" [paginator]="true" [rows]="7" [filterDelay]="true">
-        <ng-template pTemplate="header">
-          <tr>
-            <th pSortableColumn="User_id">
-              Id <p-sortIcon field="User_id"></p-sortIcon>
-            </th>
-            <th pSortableColumn="Date">
-              Date <p-sortIcon field="Date"></p-sortIcon>
-            </th>
-            <th pSortableColumn="Time">
-              Time <p-sortIcon field="Time"></p-sortIcon>
-            </th>
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <p-table [responsive]="true" [value]="Sensors" [paginator]="true" [rows]="7" [filterDelay]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="User_id">
+                            Id
+                            <p-sortIcon field="User_id"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="Date">
+                            Date
+                            <p-sortIcon field="Date"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="Time">
+                            Time
+                            <p-sortIcon field="Time"></p-sortIcon>
+                        </th>
 
-            <th pSortableColumn="PH_sensor">
-              Ph <p-sortIcon field="PH_sensor"></p-sortIcon>
-            </th>
-            <th pSortableColumn="Temperature_sensor">
-              temp <p-sortIcon field="Temperature_sensor"></p-sortIcon>
-            </th>
+                        <th pSortableColumn="PH_sensor">
+                            Ph
+                            <p-sortIcon field="PH_sensor"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="Temperature_sensor">
+                            temp
+                            <p-sortIcon field="Temperature_sensor"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                    <tr>
+                        <hr class="PhoneReviwe">
+                        <td>
+                            <span class="PhoneReviwe">Id:</span> {{ rowIndex+1 }}
+                        </td>
+                        <td>
+                            <span class="PhoneReviwe">date:</span> {{ product.date | date }}
+                        </td>
+                        <td>
+                            <span class="PhoneReviwe">time:</span> {{ product.time |slice : '1' : '5'}}
+                        </td>
+                        <td>
+                            <span class="PhoneReviwe">PH_sensor:</span> {{ product.PH_sensor }}
+                        </td>
+                        <td>
+                            <span class="PhoneReviwe">Temperature_sensor:</span> {{ product.Temperature_sensor }}
+                        </td>
 
-
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-          <tr>
+                    </tr>
+                </ng-template>
+            </p-table>
             <hr class="PhoneReviwe">
-            <td>
-              <span class="PhoneReviwe">Id:</span>
-              {{ rowIndex+1 }}
-            </td>
-            <td>
-              <span class="PhoneReviwe">date:</span>
-              {{ product.date | date }}
-            </td>
-            <td>
-              <span class="PhoneReviwe">time:</span>
-              {{ product.time |slice : '1' : '5'}}
-            </td>
-            <td>
-              <span class="PhoneReviwe">PH_sensor:</span>
-              {{ product.PH_sensor }}
-            </td>
-            <td>
-              <span class="PhoneReviwe">Temperature_sensor:</span>
-              {{ product.Temperature_sensor }}
-            </td>
 
-          </tr>
-        </ng-template>
-      </p-table>
-      <hr class="PhoneReviwe">
-
-    </div>
+        </div>
 
 
-    <div class="col-md-4 col-sm-12">
+        <div class="col-md-4 col-sm-12">
 
-        <select  (change)="ChangeChart($event)" class="form-control">
+            <select (change)="ChangeChart($event)" class="form-control">
           <option selected hidden>Select Chart</option>
           <option value="horizontalBar">horizontalBar</option>
           <option value="radar">radar</option>
@@ -92,19 +90,19 @@
           <option value="polarArea">polarArea</option>
           <option value="line" >line</option>
         </select>
-      <!-- <button>Change Chart</button> -->
-     <div class="chart">
-      <p-chart [responsive]="true" *ngIf="ChartType == 'line'" id="p-Chart" type="line" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)">
-      </p-chart>
-      <p-chart *ngIf="ChartType == 'horizontalBar'" type="horizontalBar" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)">
-      </p-chart>
-      <p-chart *ngIf="ChartType == 'radar'" type="radar" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
-      <p-chart *ngIf="ChartType == 'bar'" type="bar" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
-      <p-chart *ngIf="ChartType == 'polarArea'" type="polarArea" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
+            <!-- <button>Change Chart</button> -->
+            <div class="chart">
+                <p-chart [responsive]="true" *ngIf="ChartType == 'line'" id="p-Chart" type="line" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)">
+                </p-chart>
+                <p-chart *ngIf="ChartType == 'horizontalBar'" type="horizontalBar" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)">
+                </p-chart>
+                <p-chart *ngIf="ChartType == 'radar'" type="radar" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
+                <p-chart *ngIf="ChartType == 'bar'" type="bar" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
+                <p-chart *ngIf="ChartType == 'polarArea'" type="polarArea" [data]="data" width="200" height="500" (onDataSelect)="selectData($event)"></p-chart>
 
-     </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 

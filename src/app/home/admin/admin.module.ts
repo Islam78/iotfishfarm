@@ -5,16 +5,24 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { NewFarmComponent } from './new-farm/new-farm.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GenerateComponent } from './generate/generate.component';
+import {TableModule} from 'primeng/table';
+
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
-  declarations: [NewFarmComponent],
+  declarations: [NewFarmComponent, GenerateComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule,
+    DialogModule,
+    ButtonModule
   ]
 })
 export class AdminModule { }

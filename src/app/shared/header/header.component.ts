@@ -43,18 +43,24 @@ export class HeaderComponent implements OnInit {
       });
     this.primengConfig.ripple
   }
+  ControlToggelValue = false
 
+  ControlToggel() {
+    this.ControlToggelValue = !this.ControlToggelValue
+    this.LiveToggelValue = false
+    this.ReportToggelValue = false
+  }
   LiveToggelValue = false
   LiveToggel() {
     this.LiveToggelValue = !this.LiveToggelValue
     this.ReportToggelValue = false
+    this.ControlToggelValue = false
   }
   ReportToggelValue = false
   ReportToggel() {
-    console.log(this.ToggelOption);
-
     this.ReportToggelValue = !this.ReportToggelValue
     this.LiveToggelValue = false
+    this.ControlToggelValue = false
   }
   LogOut() {
     // to close every thins in navbar
