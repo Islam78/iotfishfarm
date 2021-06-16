@@ -10,19 +10,19 @@ import { map } from 'rxjs/operators'
   providedIn: 'root'
 })
 export class AuthService {
-  // <User>
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
-  constructor(private _http: HttpClient, private router: Router) {
+  constructor(private _http: HttpClient) {
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
   }
+
   userValue(): Observable<any> {
     return this.userSubject.asObservable();
   }
+
   Login(body) {
-    // return this._http.post(`${environment.apiUrl}login`, body)
     return this._http.post<User>(`${environment.apiUrl}login`, body)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -34,15 +34,13 @@ export class AuthService {
   }
   logout() {
     // remove user from local storage to log user out
-    // localStorage.setItem('user', null);
     this.userSubject.next(null);
-    // this.router.navigate(['/login']);
   }
-
-
+  // add new admin
   AdminRgister(body) {
     return this._http.post(`${environment.apiUrl}admin/signupadmin`, body)
   }
+  // add new user
   UserRgister(body) {
     return this._http.post(`${environment.apiUrl}admin/signupuser`, body)
   }

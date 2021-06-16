@@ -12,38 +12,46 @@ import { AdminService } from 'src/app/services/admin/admin.service';
 })
 export class GenerateComponent implements OnInit {
 
-  constructor(private ActiveRoute: ActivatedRoute, private adminService: AdminService, private translatr: TranslateService, private fb: FormBuilder,
-    private messageService: MessageService) { }
+  constructor(
+    private ActiveRoute: ActivatedRoute,
+    private adminService: AdminService,
+    private translatr: TranslateService,
+  ) { }
   ActiveUrl
   Result
+
   ngOnInit(): void {
     this.ActiveRoute.params.subscribe(res => this.ActiveUrl = res[0])
     this.GetAll()
   }
+
   GetAll() {
     this.adminService.GetAllUsers(this.ActiveUrl).subscribe((res: any) => this.Result = res.result)
   }
+
   delete(item) {
     this.adminService.DeleteUser(this.ActiveUrl, item).subscribe((res: any) => this.GetAll())
   }
-  selectedItem: any
 
+  selectedItem: any
   edit(item) {
     this.selectedItem = item
     this.showModalDialog()
   }
-  SaveEdit(){
-    this.adminService.EditUser(this.ActiveUrl, this.selectedItem).subscribe(res=>{
+
+  SaveEdit() {
+    this.adminService.EditUser(this.ActiveUrl, this.selectedItem).subscribe(res => {
       console.log(res);
       this.GetAll()
-      this.displayModal=false
+      this.displayModal = false
     })
   }
+
   displayModal = false
   showModalDialog() {
     this.displayModal = true;
   }
-  // Change Language
+
   Langage: any = localStorage.getItem('Lang') ? localStorage.getItem('Lang') : localStorage.setItem('Lang', 'en')
   ChangLan(Lang) {
     localStorage.setItem('Lang', Lang)

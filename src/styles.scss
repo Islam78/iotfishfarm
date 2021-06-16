@@ -1,20 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css?family=Cairo&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
-// @import "~@ng-select/ng-select/themes/default.theme.css";
-// @import "../node_modules/angular-calendar/css/angular-calendar.css";
 body {
   text-align: start;
   font-size: 14px;
   background-color: #eaf0f7;
-  font-family: "Open Sans", sans-serif; // for english
-
-
+  font-family: "Open Sans", sans-serif;
 }
-html, body {
-  height:100%;
-  // position: absolute;
-  }
+html,
+body {
+  height: 100%;
+}
 .Lang {
   box-shadow: 15px 10px 15px #2c2c2c;
   width: 50px;
@@ -46,7 +42,6 @@ html, body {
     }
   }
 }
-
 .PageTitle {
   color: #004770;
   position: relative;
@@ -54,7 +49,6 @@ html, body {
   font-style: italic;
   left: 85px;
 }
-
 .parent-ico {
   box-shadow: 10px 15px 15px #2c2c2c;
   width: 50px;

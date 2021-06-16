@@ -14,13 +14,17 @@ import { ReportService } from 'src/app/services/reports/report.service'
 export class ReportsComponent implements OnInit {
   data: any;
   Farm_name
-  constructor(private fb: FormBuilder, private messageService: MessageService,
-    private ReportSer: ReportService, private translatr: TranslateService, private ActiveRoute: ActivatedRoute) { }
+  constructor(
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private ReportSer: ReportService,
+    private translatr: TranslateService,
+    private ActiveRoute: ActivatedRoute
+  ) { }
   ngOnInit(): void {
     this.initForm()
     this.ActiveRoute.params.subscribe(res => this.Farm_name = res.id)
   }
-
   SearchCriteria: FormGroup;
   initForm() {
     this.SearchCriteria = this.fb.group({
@@ -31,6 +35,7 @@ export class ReportsComponent implements OnInit {
       Period: ['']
     })
   }
+
   ShowChart = false;
   Sensors: any = new Array<any>();
   leng: any = new Array<Date>();
@@ -38,15 +43,6 @@ export class ReportsComponent implements OnInit {
   Temperature_sensor: any = new Array<any>();
   onSubmit() {
     this.SearchCriteria.get('Farm_name').setValue(this.Farm_name)
-    //this.SearchCriteria.value
-    // let fake = {
-    //   End_Date: "2021-04-22",
-    //   Farm_name: "suze1",
-    //   Period: "",
-    //   Start_Date: "2020-03-18",
-    //   User_code: "hema",
-    // }
-
     this.ReportSer.getReport(this.SearchCriteria.value).subscribe((res: any) => {
       if (res.result[0]) {
         this.PH_sensor = []
@@ -55,7 +51,6 @@ export class ReportsComponent implements OnInit {
         this.Sensors = res.result
         this.ShowChart = true
       }
-
       for (let index = 0; index < this.Sensors.length; index++) {
         this.leng.push(this.Sensors[index].date.slice(0, 9))
         this.PH_sensor.push(this.Sensors[index].PH_sensor)
@@ -64,7 +59,8 @@ export class ReportsComponent implements OnInit {
       this.MakeData();
     })
   }
-  options
+
+  options;
   MakeData() {
     this.data = {
       labels: this.leng,
@@ -96,8 +92,7 @@ export class ReportsComponent implements OnInit {
               labelString: 'USD',
               beginAtZero: true,
             },
-            //yAxisID: "id1"
-            id: "id1" // incorrect property name.
+            id: "id1"
           },
           {
             scaleLabel: {
@@ -105,15 +100,13 @@ export class ReportsComponent implements OnInit {
               labelString: 'Commissions',
               beginAtZero: true,
             },
-            //display: false,
             display: true, // Hopefully don't have to explain this one.
             type: "linear",
             position: "right",
             gridLines: {
               display: false
             },
-            //yAxisID: "id2"
-            id: "id2" // incorrect property name.
+            id: "id2"
           }
         ]
       }
@@ -125,12 +118,6 @@ export class ReportsComponent implements OnInit {
   ChartType = 'line'
   ChangeChart(value) {
     this.ChartType = value.target.value
-    // let Chart = document.getElementById('p-Chart')
-    // Chart.setAttribute('type', value.target.value)
-    // Chart.setAttribute('ng-reflect-type', value.target.value)
-    // // ng-reflect-type
-    // console.log(Chart);
-
   }
   // Change Language
   Langage: any = localStorage.getItem('Lang') ? localStorage.getItem('Lang') : localStorage.setItem('Lang', 'en')

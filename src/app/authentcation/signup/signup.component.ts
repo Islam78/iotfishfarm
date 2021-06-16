@@ -15,7 +15,6 @@ export class SignupComponent implements OnInit {
   UserType
   constructor(private translatr: TranslateService,
     private fb: FormBuilder,
-    private http: HttpClient,
     private authService: AuthService) { }
   ngOnInit() {
     this.UserType = 'Selected'
@@ -47,14 +46,12 @@ export class SignupComponent implements OnInit {
     this.authService.AdminRgister(this.AdminSignUpForm.value).subscribe(res => {
       console.log(res);
       this.AdminSignUpForm.reset()
-      // debugger
     })
   }
   UsersendData() {
     this.authService.UserRgister(this.UserSignUpForm.value).subscribe(res => {
       console.log(res);
       this.UserSignUpForm.reset()
-      // debugger
     })
   }
   // Change Language

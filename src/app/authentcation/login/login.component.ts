@@ -1,11 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { SharedService } from 'src/app/services/shared/shared.service';
 import { first } from 'rxjs/operators'
 @Component({
   selector: 'app-login',
@@ -14,11 +12,13 @@ import { first } from 'rxjs/operators'
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private authServices: AuthService, private http: HttpClient,
-    private fb: FormBuilder, private translatr: TranslateService,
-    private SharedService: SharedService, private _Router: Router,
+  constructor(private router: Router,
+    private authServices: AuthService,
+    private fb: FormBuilder,
+    private translatr: TranslateService,
     private messageService: MessageService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute
+  ) { }
   LoginForm: FormGroup
   ngOnInit(): void {
     this.InitForm()
@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (res: any) => {
-          // get return url from query parameters or default to home page
           if (res.error) {
             this.error = res.error;
             this.messageService.add({ severity: 'error', summary: 'Error', detail: `${this.error}` })
@@ -58,6 +57,5 @@ export class LoginComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: `${this.error}` })
         }
       });
-
   }
 }

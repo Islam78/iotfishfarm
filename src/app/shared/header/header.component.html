@@ -12,16 +12,16 @@
 <p-sidebar [(visible)]="display" [style]="{width:'265px',padding: '3px 10px'}">
   <div>
     <br>
-    <!-- <i class="pi pi-bell" pBadge value="6" severity="success"></i> -->
-
+    <!-- If User  Login Show Name -->
     <p *ngIf="UserDetail.result.Admin_code || UserDetail.result.usercode" class="UserName"> {{'Welcom' |translate}},
       {{UserDetail?.result.Name}}
     </p>
+    <!-- If User Login Show Remove Login Btn -->
     <button *ngIf="!UserDetail.result.Admin_code && !UserDetail.result.usercode" class="btn btnDark"
       routerLink="./auth"> {{'Login' | translate}} </button>
-
     <button *ngIf="UserDetail.result.Admin_code" class="btn btnDark" (click)="ControlToggel()"> {{'Control' |
       translate}}</button>
+    <!-- If Admin Login Show Controler  -->
     <div class="LiveDropdown ml-3 mt-2 pb-4" *ngIf="ControlToggelValue == true">
       <div>
         <button class="btn btnDark" [routerLink]="['./Admin/generate', ['admins']]">
@@ -32,13 +32,11 @@
         </button>
       </div>
     </div>
-
     <button *ngIf="UserDetail.result.Admin_code" class="btn btnDark" routerLink="./auth/SignUp"> {{'AddNewUser' |
       translate}}</button>
-
     <button *ngIf="UserDetail.result.Admin_code" class="btn btnDark" routerLink="./Admin/new-farm"> {{'AddNewpool' |
       translate}}</button>
-
+    <!-- If User Login Show Controler  -->
     <button *ngIf="UserDetail.result.usercode" class="btn btnDark" (click)="LiveToggel()"> {{'Live' |
       translate}}</button>
     <div class="LiveDropdown ml-3 mt-2 pb-4" *ngIf="LiveToggelValue == true">
@@ -58,6 +56,7 @@
       </div>
     </div>
     <button class="btn btnDark"> {{'About'| translate}} </button>
+    <!-- If Admin or User Login Show Logout Btn  -->
     <button *ngIf="UserDetail.result.usercode || UserDetail.result.Admin_code" (click)="LogOut()" class="btn btnDark">
       {{'LogOut'| translate}} </button>
   </div>

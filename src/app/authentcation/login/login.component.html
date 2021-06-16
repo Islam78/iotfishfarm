@@ -13,29 +13,25 @@
     <form [formGroup]="LoginForm" (ngSubmit)="LOGIN()">
       <!-- User Name -->
       <span class="p-float-label">
-        <input type="text" class="form-control" placeholder=" {{'UserName' | translate}}" pInput name="username" required formControlName="code" id="UserName">
+        <input type="text" class="form-control" placeholder=" {{'UserName' | translate}}" pInput name="username"
+          required formControlName="code" id="UserName">
         <!-- <label for="UserName">{{"UserName" | translate}}</label> -->
       </span>
       <!-- Password -->
       <span class="p-float-label">
-        <input type="password" class="form-control" placeholder=" {{'Password' | translate}}" pInput name="Password" required formControlName="password"
-          id="Password">
-        <!-- <label for="Password">{{"Password" | translate}}</label> -->
+        <input type="password" class="form-control" placeholder=" {{'Password' | translate}}" pInput name="Password"
+          required formControlName="password" id="Password">
       </span><br>
       <span class="p-float-label">
-          <select required class="form-control" formControlName="type" name="" id="">
-            <option value="" hidden selected>User Type</option>
-            <option value="0">admin</option>
-            <option value="1">user</option>
-          </select>
-        <!-- <label for="Password">{{"Password" | translate}}</label> -->
+        <select required class="form-control" formControlName="type" name="" id="">
+          <option value="" hidden selected>User Type</option>
+          <option value="0">admin</option>
+          <option value="1">user</option>
+        </select>
       </span>
-      <!-- routerLink="./auth"  -->
-      <!-- <button class="btn btnDark" (click)="LOGIN()"> Login </button> -->
       <br>
       <hr>
       <button class="btn btnDark" [disabled]="LoginForm.invalid"> {{ 'Login' | translate }} </button>
-      <!-- <button class="btn btnDark" routerLink="/auth/SignUp">  {{ 'SignUp' | translate }} {{ 'Now' |translate}} !</button> -->
     </form>
   </div>
 </div>

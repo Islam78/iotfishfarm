@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
     this.authServices.userValue().subscribe
       (user => {
         if (user) this.UserDetail = user;
-        // else this.UserDetail = {}
         console.log(this.UserDetail);
 
       });

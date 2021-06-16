@@ -12,31 +12,28 @@ import { interval, Observable, Subscription } from 'rxjs';
 })
 export class LiveComponent implements OnInit {
 
-  constructor(private translatr: TranslateService,
-    private socketSer: SocketService, private ActiveRoute: ActivatedRoute,
-    private shareService: SharedService) { }
-  LivePh: number =0;
-  LiveTemp: number =0;
+  constructor(
+    private translatr: TranslateService,
+    private socketSer: SocketService,
+    private ActiveRoute: ActivatedRoute,
+    private shareService: SharedService
+  ) { }
+
+  LivePh: number = 0;
+  LiveTemp: number = 0;
   Img
   Farm_name
   UserDetail: any
   subscrip: Subscription
-  ngOnInit(): void {
-    // this.socketSer.con()
 
+  ngOnInit(): void {
     this.subscrip = new Subscription
     this.UserDetail = JSON.parse(this.shareService.UserDetail()).result
-    console.log(this.UserDetail?.usercode);
-
-    console.log(JSON.parse(this.shareService.UserDetail()));
-
     this.ActiveRoute.params.subscribe(res => this.Farm_name = res.id)
     this.LiveDate()
-
   }
+
   LiveDate() {
-    //
-    // sessionStorage.clear()
     this.subscrip.add(this.socketSer.sendMessage(this.UserDetail?.usercode, this.Farm_name))
     this.subscrip.add(this.socketSer.getMessages()
       .subscribe((num) => {
@@ -48,9 +45,8 @@ export class LiveComponent implements OnInit {
       console.log(img);
     }))
   }
+
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscrip.unsubscribe()
     this.socketSer.dis()
   }
